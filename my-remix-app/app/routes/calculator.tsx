@@ -1,11 +1,18 @@
 import { useRef, useState } from "react";
 import Button from "../components/Button";
-import { calculate } from "~/api/provider";
+import { calculate } from "../api/provider";
+import { useUser } from "../context/UserContext";
+import { logout } from "../api/auth";
+import { useNavigate } from "@remix-run/react";
 
 export default function Calculator() {
+  const navigate = useNavigate();
   const [input, setInput] = useState("");
   const [openBracketCount, setOpenBracketCount] = useState(0);
   const inputRef = useRef(null);
+
+  const { user, setUser } = useUser();
+
   const handleInput = (value: string) => {
     setInput((input) => input + value);
   };
@@ -39,11 +46,11 @@ export default function Calculator() {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInput(event.target.value);
     let openBracket = 0;
-    for (let i = 0; i < event.target.value.length; i++) {
-      if (event.target.value[i] === "(") {
-        openBracket = openBracket + 1;
+    for (const char of event.target.value) {
+      if (char === "(") {
+        openBracket++;
       }
-      if (event.target.value[i] === ")") {
+      if (char === ")") {
         openBracket--;
       }
     }
@@ -51,8 +58,24 @@ export default function Calculator() {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="flex flex-col gap-1 w-64 border p-2">
+    <div className="flex flex-col items-center h-screen">
+      <div className="w-full p-4 bg-gray-200">
+        <div className="flex justify-between items-center">
+          <span>{user ? `Logged in as ${user.name}` : "Not logged in"}</span>
+          <button
+            onClick={() =>
+              logout().then(() => {
+                setUser(null);
+                navigate("../login");
+              })
+            }
+            className="bg-red-500 text-white px-4 py-2 rounded"
+          >
+            Logout
+          </button>
+        </div>
+      </div>
+      <div className="flex flex-col gap-1 w-64 border p-2 mt-4">
         <h1 style={{ gridColumn: "1 / -1", textAlign: "center" }}>
           Calculator
         </h1>

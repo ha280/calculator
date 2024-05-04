@@ -3,3 +3,4 @@ node_modules
 /.cache
 /build
 .env
+./remix-calculator-firebase-adminsdk-gmhnm-5cddb66379.json
