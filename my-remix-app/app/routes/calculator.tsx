@@ -61,7 +61,11 @@ export default function Calculator() {
     <div className="flex flex-col items-center h-screen">
       <div className="w-full p-4 bg-gray-200">
         <div className="flex justify-between items-center">
-          <span>{user ? `Logged in as ${user.name}` : "Not logged in"}</span>
+          <span>
+            {user
+              ? `Logged in as ${user.name !== "" ? user.name : user.email}`
+              : "Not logged in"}
+          </span>
           <button
             onClick={() =>
               logout().then(() => {
