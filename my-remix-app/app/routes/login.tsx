@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "@remix-run/react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { googleLogin, loginWithEmail } from "../api/auth";
@@ -9,7 +9,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const auth = getAuth();
-  const { setUser } = useUser();
+  const { user, setUser } = useUser();
   const [error, setError] = useState("");
 
   const handleLogin = async () => {
@@ -30,6 +30,12 @@ export default function Login() {
       });
     }
   });
+
+  useEffect(() => {
+    if (user) {
+      navigate("/calculator");
+    }
+  }, [navigate, user]);
 
   const handleGoogleLogin = async () => {
     try {
