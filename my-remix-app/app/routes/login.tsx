@@ -61,7 +61,7 @@ export default function Login() {
           />
           <button
             onClick={handleLogin}
-            className="bg-blue-500 text-white p-2 rounded-full w-24"
+            className="bg-blue-500 text-white p-2 rounded-full w-24 hover:bg-blue-700"
           >
             Login
           </button>
@@ -70,7 +70,7 @@ export default function Login() {
             {!user && (
               <button
                 onClick={handleGoogleLogin}
-                className="bg-red-500 text-white p-2 rounded-full w-32"
+                className="bg-red-500 text-white p-2 rounded-full w-32 hover:bg-red-700"
               >
                 Google Login
               </button>
@@ -78,7 +78,7 @@ export default function Login() {
             {!user && (
               <button
                 onClick={() => navigate("/signup")}
-                className="bg-green-500 text-white p-2 rounded-full w-32"
+                className="bg-green-500 text-white p-2 rounded-full w-32 hover:bg-green-700"
               >
                 Sign-up
               </button>

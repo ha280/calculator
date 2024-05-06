@@ -12,13 +12,14 @@ const Button = ({ onClick, ...props }: ButtonProps) => {
   return (
     <button
       onClick={onClick}
-      // className={buttonStyle}
+      className={"hover:!bg-red-600 hover:!border-black"}
       style={{
         borderRadius: "50%",
         backgroundColor: "red",
         padding: "0.5rem",
         width: "3rem",
         height: "3rem",
+        transition: "background-color 0.3s",
       }}
     >
       {props.children}
