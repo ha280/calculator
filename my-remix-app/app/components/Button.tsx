@@ -1,4 +1,5 @@
 import React from "react";
+import { buttonStyle } from "./button.css";
 export interface ButtonProps
   extends React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
@@ -10,7 +11,7 @@ export interface ButtonProps
 
 const Button = ({ onClick, ...props }: ButtonProps) => {
   return (
-    <button onClick={onClick} className="rounded-full bg-red-400 p-2 w-12 h-12">
+    <button onClick={onClick} className={buttonStyle}>
       {props.children}
     </button>
   );
