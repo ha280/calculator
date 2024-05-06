@@ -9,7 +9,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const auth = getAuth();
-  const { user, setUser } = useUser();
+  const { setUser } = useUser();
   const [error, setError] = useState("");
 
   const handleLogin = async () => {
@@ -67,22 +67,22 @@ export default function Login() {
           </button>
 
           <div className="flex gap-2 mt-4">
-            {!user && (
+            {
               <button
                 onClick={handleGoogleLogin}
                 className="bg-red-500 text-white p-2 rounded-full w-32 hover:bg-red-700"
               >
                 Google Login
               </button>
-            )}
-            {!user && (
+            }
+            {
               <button
                 onClick={() => navigate("/signup")}
                 className="bg-green-500 text-white p-2 rounded-full w-32 hover:bg-green-700"
               >
                 Sign-up
               </button>
-            )}
+            }
           </div>
         </div>
       </div>
