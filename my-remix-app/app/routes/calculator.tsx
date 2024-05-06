@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../components/Button";
 import { calculate } from "../api/provider";
 import { useUser } from "../context/UserContext";
@@ -12,7 +12,11 @@ export default function Calculator() {
   const inputRef = useRef(null);
 
   const { user, setUser } = useUser();
-
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [navigate, user]);
   const handleInput = (value: string) => {
     setInput((input) => input + value);
   };
